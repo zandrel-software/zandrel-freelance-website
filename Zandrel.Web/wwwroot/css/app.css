@@ -65,14 +65,20 @@
 }
 
 html {
+    width: 100%;
+    min-height: 100%;
     scroll-behavior: smooth;
     scroll-padding-top: 6rem;
+    background: var(--color-background);
 }
 
 body {
+    width: 100%;
     min-width: 320px;
     min-height: 100vh;
+    min-height: 100dvh;
     margin: 0;
+    overflow-x: hidden;
     background: var(--color-background);
     color: var(--color-text-primary);
     font-family: var(--font-family-base);
@@ -81,6 +87,11 @@ body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
+}
+
+#app {
+    width: 100%;
+    min-height: 100dvh;
 }
 
 h1,
@@ -117,11 +128,17 @@ select {
     font: inherit;
 }
 
+button,
+a {
+    -webkit-tap-highlight-color: transparent;
+}
+
 button {
     border: 0;
 }
 
 img,
+picture,
 svg {
     display: block;
     max-width: 100%;
@@ -256,119 +273,53 @@ svg {
     }
 
 /* =========================================================
-   Application loader
+   Blazor loading state
    ========================================================= */
 
-.app-loader {
-    position: fixed;
-    inset: 0;
-    z-index: 9999;
+.app-loading {
     display: grid;
-    place-items: center;
+    width: 100%;
+    min-height: 100vh;
     min-height: 100dvh;
-    padding: 1.5rem;
-    background: radial-gradient( circle at 75% 25%, rgba(245, 155, 126, 0.18), transparent 26rem ), radial-gradient( circle at 25% 80%, rgba(244, 226, 196, 0.42), transparent 24rem ), var(--color-background);
-    color: var(--color-text-primary);
-}
-
-.app-loader__content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: min(100%, 280px);
-    text-align: center;
-}
-
-.app-loader__brand {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 1.5rem;
-}
-
-.app-loader__mark {
-    display: grid;
     place-items: center;
-    width: 5.5rem;
-    height: 5.5rem;
-    margin-bottom: 0.8rem;
-    background: rgba(255, 255, 255, 0.72);
-    border: 1px solid rgba(226, 106, 74, 0.12);
-    border-radius: 1.75rem;
-    box-shadow: 0 18px 45px rgba(59, 42, 35, 0.08);
-    animation: loader-float 2.4s ease-in-out infinite;
+    background: radial-gradient( circle at 70% 25%, rgba(245, 155, 126, 0.10), transparent 24rem ), radial-gradient( circle at 30% 80%, rgba(244, 226, 196, 0.22), transparent 22rem ), var(--color-background);
 }
 
-    .app-loader__mark img {
-        width: 4.75rem;
-        height: 4.75rem;
-        object-fit: contain;
-    }
-
-.app-loader__name {
-    color: var(--color-text-primary);
-    font-size: 1.35rem;
-    font-weight: 700;
-    letter-spacing: -0.03em;
-}
-
-/* =========================================================
-   Loader status
-   ========================================================= */
-
-.app-loader__status {
+.app-loading__content {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
-    gap: 0.45rem;
-    min-height: 1rem;
+    gap: 1.5rem;
 }
 
-    .app-loader__status span {
-        width: 0.45rem;
-        height: 0.45rem;
-        background: var(--color-accent);
-        border-radius: 50%;
-        opacity: 0.3;
-        animation: loader-dot 1.4s ease-in-out infinite;
+.app-loading__mark {
+    width: 4.5rem;
+    height: 4.5rem;
+    object-fit: contain;
+}
+
+.app-loading__bar {
+    position: relative;
+    width: 10rem;
+    height: 0.25rem;
+    overflow: hidden;
+    border-radius: var(--radius-pill);
+    background: var(--color-sand);
+}
+
+    .app-loading__bar::after {
+        position: absolute;
+        inset: 0;
+        content: "";
+        border-radius: inherit;
+        background: var(--gradient-brand);
+        transform: scaleX(var(--blazor-load-percentage, 0%));
+        transform-origin: left center;
+        transition: transform var(--transition-base);
     }
-
-        .app-loader__status span:nth-child(2) {
-            animation-delay: 0.16s;
-        }
-
-        .app-loader__status span:nth-child(3) {
-            animation-delay: 0.32s;
-        }
 
 /* =========================================================
-   Loader animations
-   ========================================================= */
-
-@keyframes loader-dot {
-    0%, 60%, 100% {
-        opacity: 0.3;
-        transform: translateY(0) scale(0.9);
-    }
-
-    30% {
-        opacity: 1;
-        transform: translateY(-0.2rem) scale(1);
-    }
-}
-
-@keyframes loader-float {
-    0%, 100% {
-        transform: translateY(0);
-    }
-
-    50% {
-        transform: translateY(-0.3rem);
-    }
-}
-
-/* =========================================================
-   Blazor
+   Blazor error UI
    ========================================================= */
 
 #blazor-error-ui {
@@ -397,7 +348,11 @@ svg {
         position: absolute;
         top: 50%;
         right: 1rem;
+        padding: 0;
+        background: transparent;
         color: var(--color-cream);
+        font-size: 1.25rem;
+        line-height: 1;
         cursor: pointer;
         transform: translateY(-50%);
     }
@@ -415,19 +370,13 @@ svg {
         padding-block: 4.5rem;
     }
 
-    .app-loader__mark {
-        width: 5rem;
-        height: 5rem;
-        border-radius: 1.5rem;
+    .app-loading__mark {
+        width: 4rem;
+        height: 4rem;
     }
 
-        .app-loader__mark img {
-            width: 4.25rem;
-            height: 4.25rem;
-        }
-
-    .app-loader__content {
-        width: min(100%, 250px);
+    .app-loading__bar {
+        width: 9rem;
     }
 }
 
@@ -449,13 +398,7 @@ svg {
         animation-iteration-count: 1 !important;
     }
 
-    .app-loader__mark,
-    .app-loader__status span {
-        animation: none !important;
-    }
-
-    .app-loader__status span {
-        opacity: 0.6;
-        transform: none;
+    .app-loading__bar::after {
+        transition: none;
     }
 }

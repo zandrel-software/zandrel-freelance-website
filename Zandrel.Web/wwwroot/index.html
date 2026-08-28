@@ -1,14 +1,22 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es-MX">
 
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 
     <title>Zandrel | Desarrollo de software a medida</title>
 
     <meta name="description"
           content="Desarrollo de software a medida para personas, profesionales y proyectos. Páginas web, sistemas, automatizaciones, aplicaciones y soluciones personalizadas." />
+
+    <meta name="robots"
+          content="index, follow, max-image-preview:large" />
+
+    <meta name="theme-color"
+          content="#FFFAF4" />
 
     <base href="/" />
 
@@ -83,28 +91,15 @@
 
 <body>
     <div id="app">
-        <div class="app-loader"
-             role="status"
-             aria-live="polite"
-             aria-label="Cargando Zandrel">
+        <div class="app-loading">
+            <div class="app-loading__content">
+                <img class="app-loading__mark"
+                     src="images/brand/zandrel-mark-transparent.png"
+                     alt="Zandrel" />
 
-            <div class="app-loader__content">
-                <div class="app-loader__brand">
-                    <div class="app-loader__mark">
-                        <img src="images/brand/zandrel-mark-transparent.png"
-                             alt="" />
-                    </div>
-
-                    <span class="app-loader__name">
-                        Zandrel
-                    </span>
-                </div>
-
-                <div class="app-loader__status"
-                     aria-hidden="true">
-                    <span></span>
-                    <span></span>
-                    <span></span>
+                <div class="app-loading__bar"
+                     role="progressbar"
+                     aria-label="Cargando Zandrel">
                 </div>
             </div>
         </div>
@@ -118,7 +113,11 @@
             Recargar
         </a>
 
-        <span class="dismiss">×</span>
+        <button class="dismiss"
+                type="button"
+                aria-label="Cerrar mensaje de error">
+            ×
+        </button>
     </div>
 
     <script src="_framework/blazor.webassembly#[.{fingerprint}].js"></script>
