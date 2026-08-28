@@ -101,8 +101,21 @@
         margin: 0.28rem auto;
         background: var(--color-text-primary);
         border-radius: var(--radius-pill);
+        transform-origin: center;
         transition: transform var(--transition-fast), opacity var(--transition-fast);
     }
+
+.site-header__menu-toggle--open span:nth-child(1) {
+    transform: translateY(6px) rotate(45deg);
+}
+
+.site-header__menu-toggle--open span:nth-child(2) {
+    opacity: 0;
+}
+
+.site-header__menu-toggle--open span:nth-child(3) {
+    transform: translateY(-6px) rotate(-45deg);
+}
 
 /* =========================================================
    Responsive

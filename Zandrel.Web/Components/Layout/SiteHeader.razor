@@ -9,7 +9,7 @@
                  class="site-header__logo" />
         </a>
 
-        <button class="site-header__menu-toggle"
+        <button class="site-header__menu-toggle @(_isMenuOpen ? "site-header__menu-toggle--open" : string.Empty)"
                 type="button"
                 aria-label="@(_isMenuOpen ? "Cerrar menú" : "Abrir menú")"
                 aria-controls="site-navigation"
@@ -48,8 +48,11 @@
                 Contacto
             </a>
 
-            <a href="#contacto"
+            <a href="https://wa.me/527751272647?text=Hola%2C%20vi%20la%20p%C3%A1gina%20de%20Zandrel%20y%20me%20gustar%C3%ADa%20platicar%20sobre%20un%20proyecto."
                class="button button--primary site-header__cta"
+               target="_blank"
+               rel="noopener noreferrer"
+               aria-label="Cuéntanos tu proyecto por WhatsApp"
                @onclick="CloseMenu">
                 Cuéntanos tu proyecto
             </a>
