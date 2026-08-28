@@ -1,0 +1,300 @@
+﻿.contact {
+    position: relative;
+    background: var(--color-background-alt);
+}
+
+.contact__panel {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(360px, 0.8fr);
+    align-items: center;
+    gap: clamp(3rem, 8vw, 6rem);
+    overflow: hidden;
+    padding: clamp(2rem, 6vw, 4.5rem);
+    background: radial-gradient( circle at 90% 20%, rgba(245, 155, 126, 0.14), transparent 24rem ), linear-gradient( 145deg, rgba(255, 255, 255, 0.97), rgba(255, 247, 237, 0.94) );
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-md);
+}
+
+/* =========================================================
+   Content
+   ========================================================= */
+
+.contact__content {
+    position: relative;
+    z-index: 2;
+    max-width: 650px;
+}
+
+.contact__title {
+    margin-bottom: 1.25rem;
+    color: var(--color-text-primary);
+    font-size: clamp(2.4rem, 5vw, 4.4rem);
+    font-weight: 750;
+    letter-spacing: -0.05em;
+    line-height: 1;
+}
+
+.contact__description {
+    max-width: 590px;
+    margin-bottom: 0.8rem;
+    color: var(--color-text-secondary);
+    font-size: clamp(1rem, 1.7vw, 1.12rem);
+    line-height: 1.72;
+}
+
+.contact__highlight {
+    max-width: 590px;
+    margin-bottom: 0;
+    color: var(--color-text-primary);
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.65;
+}
+
+.contact__button {
+    min-height: 3.6rem;
+    margin-top: 2rem;
+    padding-inline: 1.5rem;
+}
+
+    .contact__button svg {
+        width: 1.25rem;
+        height: 1.25rem;
+        fill: none;
+        stroke: currentColor;
+        stroke-width: 1.55;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+    }
+
+.contact__meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1.25rem;
+    color: var(--color-text-muted);
+    font-size: 0.82rem;
+    font-weight: 550;
+}
+
+/* =========================================================
+   Visual
+   ========================================================= */
+
+.contact__visual {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 420px;
+}
+
+.message-card {
+    position: relative;
+    z-index: 2;
+    width: min(100%, 390px);
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.96);
+    border: 1px solid var(--color-border);
+    border-radius: 1.75rem;
+    box-shadow: 0 25px 60px rgba(59, 42, 35, 0.12);
+    transform: rotate(1.25deg);
+}
+
+/* =========================================================
+   Message header
+   ========================================================= */
+
+.message-card__header {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 1rem 1.1rem;
+    background: rgba(255, 247, 237, 0.9);
+    border-bottom: 1px solid var(--color-border);
+}
+
+.message-card__avatar {
+    display: grid;
+    place-items: center;
+    width: 2.7rem;
+    height: 2.7rem;
+    overflow: hidden;
+    background: var(--color-surface-soft);
+    border-radius: 50%;
+}
+
+    .message-card__avatar img {
+        width: 3.5rem;
+        height: 3.5rem;
+        object-fit: contain;
+    }
+
+.message-card__header strong {
+    display: block;
+    color: var(--color-text-primary);
+    font-size: 0.9rem;
+}
+
+.message-card__header span:not(.message-card__status) {
+    display: block;
+    margin-top: 0.1rem;
+    color: var(--color-text-muted);
+    font-size: 0.68rem;
+}
+
+.message-card__status {
+    width: 0.55rem;
+    height: 0.55rem;
+    background: #4f9f62;
+    border-radius: 50%;
+    box-shadow: 0 0 0 4px rgba(79, 159, 98, 0.1);
+}
+
+/* =========================================================
+   Conversation
+   ========================================================= */
+
+.message-card__conversation {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    min-height: 270px;
+    padding: 1.15rem;
+    background: linear-gradient( 180deg, #fffdf9, #fff8f0 );
+}
+
+.message {
+    max-width: 82%;
+    padding: 0.75rem 0.9rem;
+    border-radius: 1rem;
+    font-size: 0.76rem;
+    line-height: 1.5;
+}
+
+.message--incoming {
+    align-self: flex-start;
+    background: var(--color-surface);
+    color: var(--color-text-secondary);
+    border: 1px solid var(--color-border);
+    border-bottom-left-radius: 0.35rem;
+}
+
+.message--outgoing {
+    align-self: flex-end;
+    background: var(--color-surface-soft);
+    color: var(--color-text-primary);
+    border: 1px solid rgba(226, 106, 74, 0.12);
+    border-bottom-right-radius: 0.35rem;
+}
+
+/* =========================================================
+   Input
+   ========================================================= */
+
+.message-card__input {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.85rem 1rem;
+    background: var(--color-surface);
+    border-top: 1px solid var(--color-border);
+}
+
+    .message-card__input > span {
+        color: var(--color-text-muted);
+        font-size: 0.72rem;
+    }
+
+.message-card__send {
+    display: grid;
+    place-items: center;
+    width: 2rem;
+    height: 2rem;
+    background: var(--color-accent-strong);
+    color: #ffffff;
+    border-radius: 50%;
+}
+
+    .message-card__send svg {
+        width: 0.9rem;
+        height: 0.9rem;
+        fill: none;
+        stroke: currentColor;
+        stroke-width: 1.7;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+    }
+
+/* =========================================================
+   Decorations
+   ========================================================= */
+
+.contact__shape {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+.contact__shape--one {
+    top: 0;
+    right: -2rem;
+    width: 13rem;
+    height: 13rem;
+    background: rgba(244, 226, 196, 0.5);
+}
+
+.contact__shape--two {
+    bottom: 0;
+    left: 1rem;
+    width: 8rem;
+    height: 8rem;
+    background: rgba(245, 155, 126, 0.13);
+}
+
+/* =========================================================
+   Responsive
+   ========================================================= */
+
+@media (max-width: 900px) {
+    .contact__panel {
+        grid-template-columns: 1fr;
+    }
+
+    .contact__visual {
+        min-height: auto;
+        padding: 1rem 0;
+    }
+
+    .message-card {
+        width: min(100%, 470px);
+        transform: none;
+    }
+}
+
+@media (max-width: 640px) {
+    .contact__panel {
+        padding: 1.5rem;
+        border-radius: var(--radius-lg);
+    }
+
+    .contact__title {
+        font-size: clamp(2.3rem, 12vw, 3.4rem);
+    }
+
+    .contact__button {
+        width: 100%;
+    }
+
+    .contact__meta {
+        justify-content: center;
+    }
+
+    .contact__visual {
+        display: none;
+    }
+}
