@@ -83,17 +83,31 @@
 
 <body>
     <div id="app">
-        <svg class="loading-progress">
-            <circle r="40%"
-                    cx="50%"
-                    cy="50%" />
+        <div class="app-loader"
+             role="status"
+             aria-live="polite"
+             aria-label="Cargando Zandrel">
 
-            <circle r="40%"
-                    cx="50%"
-                    cy="50%" />
-        </svg>
+            <div class="app-loader__content">
+                <div class="app-loader__brand">
+                    <div class="app-loader__mark">
+                        <img src="images/brand/zandrel-mark-transparent.png"
+                             alt="" />
+                    </div>
 
-        <div class="loading-progress-text"></div>
+                    <span class="app-loader__name">
+                        Zandrel
+                    </span>
+                </div>
+
+                <div class="app-loader__status"
+                     aria-hidden="true">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
     </div>
 
     <div id="blazor-error-ui">

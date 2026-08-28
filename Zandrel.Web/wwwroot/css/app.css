@@ -256,6 +256,118 @@ svg {
     }
 
 /* =========================================================
+   Application loader
+   ========================================================= */
+
+.app-loader {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: grid;
+    place-items: center;
+    min-height: 100dvh;
+    padding: 1.5rem;
+    background: radial-gradient( circle at 75% 25%, rgba(245, 155, 126, 0.18), transparent 26rem ), radial-gradient( circle at 25% 80%, rgba(244, 226, 196, 0.42), transparent 24rem ), var(--color-background);
+    color: var(--color-text-primary);
+}
+
+.app-loader__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: min(100%, 280px);
+    text-align: center;
+}
+
+.app-loader__brand {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.app-loader__mark {
+    display: grid;
+    place-items: center;
+    width: 5.5rem;
+    height: 5.5rem;
+    margin-bottom: 0.8rem;
+    background: rgba(255, 255, 255, 0.72);
+    border: 1px solid rgba(226, 106, 74, 0.12);
+    border-radius: 1.75rem;
+    box-shadow: 0 18px 45px rgba(59, 42, 35, 0.08);
+    animation: loader-float 2.4s ease-in-out infinite;
+}
+
+    .app-loader__mark img {
+        width: 4.75rem;
+        height: 4.75rem;
+        object-fit: contain;
+    }
+
+.app-loader__name {
+    color: var(--color-text-primary);
+    font-size: 1.35rem;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+}
+
+/* =========================================================
+   Loader status
+   ========================================================= */
+
+.app-loader__status {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.45rem;
+    min-height: 1rem;
+}
+
+    .app-loader__status span {
+        width: 0.45rem;
+        height: 0.45rem;
+        background: var(--color-accent);
+        border-radius: 50%;
+        opacity: 0.3;
+        animation: loader-dot 1.4s ease-in-out infinite;
+    }
+
+        .app-loader__status span:nth-child(2) {
+            animation-delay: 0.16s;
+        }
+
+        .app-loader__status span:nth-child(3) {
+            animation-delay: 0.32s;
+        }
+
+/* =========================================================
+   Loader animations
+   ========================================================= */
+
+@keyframes loader-dot {
+    0%, 60%, 100% {
+        opacity: 0.3;
+        transform: translateY(0) scale(0.9);
+    }
+
+    30% {
+        opacity: 1;
+        transform: translateY(-0.2rem) scale(1);
+    }
+}
+
+@keyframes loader-float {
+    0%, 100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-0.3rem);
+    }
+}
+
+/* =========================================================
    Blazor
    ========================================================= */
 
@@ -302,6 +414,21 @@ svg {
     .section {
         padding-block: 4.5rem;
     }
+
+    .app-loader__mark {
+        width: 5rem;
+        height: 5rem;
+        border-radius: 1.5rem;
+    }
+
+        .app-loader__mark img {
+            width: 4.25rem;
+            height: 4.25rem;
+        }
+
+    .app-loader__content {
+        width: min(100%, 250px);
+    }
 }
 
 /* =========================================================
@@ -320,5 +447,15 @@ svg {
         transition-duration: 0.01ms !important;
         animation-duration: 0.01ms !important;
         animation-iteration-count: 1 !important;
+    }
+
+    .app-loader__mark,
+    .app-loader__status span {
+        animation: none !important;
+    }
+
+    .app-loader__status span {
+        opacity: 0.6;
+        transform: none;
     }
 }
