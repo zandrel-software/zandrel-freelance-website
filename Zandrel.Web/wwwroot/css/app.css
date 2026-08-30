@@ -27,7 +27,7 @@
     /* Typography */
     --font-family-base: "Segoe UI", Inter, system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
     /* Layout */
-    --container-max-width: 1180px;
+    --container-max-width: 1240px;
     --container-padding: clamp(1.25rem, 4vw, 2rem);
     /* Spacing */
     --space-2xs: 0.25rem;
@@ -180,7 +180,7 @@ svg {
 }
 
 .section {
-    padding-block: clamp(4.5rem, 8vw, 7rem);
+    padding-block: clamp(4.5rem, 6vw, 6.25rem);
 }
 
 .section--surface {
@@ -356,6 +356,16 @@ svg {
         cursor: pointer;
         transform: translateY(-50%);
     }
+
+/* =========================================================
+   Large desktop
+   ========================================================= */
+
+@media (min-width: 1440px) {
+    :root {
+        --container-max-width: 1280px;
+    }
+}
 
 /* =========================================================
    Responsive
