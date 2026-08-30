@@ -130,11 +130,14 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: 470px;
+    min-height: 500px;
+    padding-block: 3rem;
+    padding-inline: 2rem;
 }
 
 .project-board {
     position: relative;
+    z-index: 2;
     width: min(100%, 460px);
     overflow: hidden;
     background: linear-gradient( 145deg, rgba(255, 255, 255, 0.98), rgba(255, 247, 237, 0.94) );
@@ -262,52 +265,79 @@
     }
 
 /* =========================================================
-   Floating details
+   Editorial notes
    ========================================================= */
 
-.hero__floating-card {
+.hero__note {
     position: absolute;
-    display: inline-flex;
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+    color: var(--color-text-muted);
+}
+
+.hero__note-text {
+    font-size: 0.7rem;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: 0.095em;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+.hero__note-line {
+    display: flex;
     align-items: center;
     gap: 0.55rem;
-    padding: 0.75rem 1rem;
-    background: rgba(255, 255, 255, 0.93);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-pill);
-    color: var(--color-text-secondary);
-    font-size: 0.8rem;
-    font-weight: 650;
-    box-shadow: var(--shadow-md);
-    backdrop-filter: blur(10px);
 }
 
-.hero__floating-card--top {
-    top: 2rem;
-    right: -0.5rem;
-}
+    .hero__note-line::before {
+        width: 3.4rem;
+        height: 1px;
+        content: "";
+        background: linear-gradient( 90deg, rgba(169, 149, 137, 0.12), rgba(169, 149, 137, 0.58) );
+    }
 
-.hero__floating-card--bottom {
-    bottom: 1.5rem;
-    left: -1rem;
-}
-
-.hero__floating-icon {
-    display: grid;
-    place-items: center;
-    width: 1.5rem;
-    height: 1.5rem;
-    background: var(--color-surface-soft);
-    color: var(--color-accent-strong);
-    border-radius: 50%;
-    font-size: 0.72rem;
-}
-
-.hero__floating-dot {
-    width: 0.55rem;
-    height: 0.55rem;
+.hero__note-marker {
+    width: 0.38rem;
+    height: 0.38rem;
+    flex-shrink: 0;
     background: var(--color-accent);
     border-radius: 50%;
 }
+
+/* =========================================================
+   Top editorial note
+   ========================================================= */
+
+.hero__note--top {
+    top: 0.35rem;
+    right: 0.4rem;
+    align-items: flex-end;
+}
+
+    .hero__note--top .hero__note-line {
+        flex-direction: row;
+    }
+
+/* =========================================================
+   Bottom editorial note
+   ========================================================= */
+
+.hero__note--bottom {
+    bottom: 0.3rem;
+    left: 0.4rem;
+    align-items: flex-start;
+}
+
+    .hero__note--bottom .hero__note-line {
+        flex-direction: row-reverse;
+    }
+
+        .hero__note--bottom .hero__note-line::before {
+            background: linear-gradient( 90deg, rgba(169, 149, 137, 0.58), rgba(169, 149, 137, 0.12) );
+        }
 
 /* =========================================================
    Responsive
@@ -323,8 +353,20 @@
         font-size: clamp(3rem, 5.5vw, 4.25rem);
     }
 
+    .hero__visual {
+        padding-inline: 1rem;
+    }
+
     .project-board {
         width: min(100%, 440px);
+    }
+
+    .hero__note--top {
+        right: -0.15rem;
+    }
+
+    .hero__note--bottom {
+        left: -0.15rem;
     }
 }
 
@@ -345,21 +387,21 @@
         width: min(100%, 600px);
         min-height: auto;
         margin-inline: auto;
-        padding: 2rem 2rem 3rem;
+        padding: 3.75rem 2rem 3.75rem;
     }
 
     .project-board {
         width: 100%;
     }
 
-    .hero__floating-card--top {
-        top: 0;
-        right: 0;
+    .hero__note--top {
+        top: 0.6rem;
+        right: 0.75rem;
     }
 
-    .hero__floating-card--bottom {
-        bottom: 0.75rem;
-        left: 0;
+    .hero__note--bottom {
+        bottom: 0.55rem;
+        left: 0.75rem;
     }
 }
 
@@ -403,7 +445,7 @@
         grid-template-columns: 1fr;
     }
 
-    .hero__floating-card {
+    .hero__note {
         display: none;
     }
 }
