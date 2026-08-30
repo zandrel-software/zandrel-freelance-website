@@ -19,7 +19,6 @@ concurrency:
 env:
   PROJECT_PATH: Zandrel.Web/Zandrel.Web.csproj
   PUBLISH_DIR: ./publish/wwwroot
-  BASE_HREF: /zandrel-freelance-website/
 
 jobs:
   build:
@@ -35,6 +34,10 @@ jobs:
         with:
           dotnet-version: '10.0.x'
 
+      - name: Configure GitHub Pages
+        id: pages
+        uses: actions/configure-pages@v6
+
       - name: Restore dependencies
         run: dotnet restore ${{ env.PROJECT_PATH }}
 
@@ -46,13 +49,51 @@ jobs:
           --no-restore
           --output ./publish
 
-      - name: Configure GitHub Pages base path
+      - name: Configure GitHub Pages deployment
+        shell: bash
+        env:
+          BASE_PATH: ${{ steps.pages.outputs.base_path }}
+          BASE_URL: ${{ steps.pages.outputs.base_url }}
         run: |
-          sed -i "s#<base href=\"/\" />#<base href=\"${BASE_HREF}\" />#" "${PUBLISH_DIR}/index.html"
+          set -e
+
+          BASE_HREF="${BASE_PATH}/"
+
+          echo "GitHub Pages base URL:  ${BASE_URL}"
+          echo "GitHub Pages base path: ${BASE_PATH}"
+          echo "Blazor base href:       ${BASE_HREF}"
+
+          # Configure Blazor base path for the active GitHub Pages URL.
+          sed -i \
+            "s|<base href=\"/\" />|<base href=\"${BASE_HREF}\" />|" \
+            "${PUBLISH_DIR}/index.html"
+
+          # Configure public URLs for the active GitHub Pages URL.
+          for FILE in \
+            "${PUBLISH_DIR}/index.html" \
+            "${PUBLISH_DIR}/robots.txt" \
+            "${PUBLISH_DIR}/sitemap.xml"
+          do
+            if [ -f "$FILE" ]; then
+              sed -i \
+                "s|https://zandrel.com|${BASE_URL}|g" \
+                "$FILE"
+            fi
+          done
+
+          # Prevent Jekyll processing.
+          touch "${PUBLISH_DIR}/.nojekyll"
+
+          # Blazor SPA fallback for GitHub Pages.
+          cp "${PUBLISH_DIR}/index.html" "${PUBLISH_DIR}/404.html"
+
+          echo ""
+          echo "Published base href:"
           grep '<base href=' "${PUBLISH_DIR}/index.html"
 
-      - name: Configure GitHub Pages
-        uses: actions/configure-pages@v6
+          echo ""
+          echo "Published canonical URL:"
+          grep 'rel="canonical"' -A 1 "${PUBLISH_DIR}/index.html"
 
       - name: Upload GitHub Pages artifact
         uses: actions/upload-pages-artifact@v5
